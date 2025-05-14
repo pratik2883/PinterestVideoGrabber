@@ -1,3 +1,5 @@
+import { Link } from "wouter";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-10">
@@ -27,11 +29,11 @@ export default function Footer() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
                 <li><a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
                 <li><a href="#faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
             
