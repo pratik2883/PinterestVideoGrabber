@@ -53,11 +53,14 @@ export default function VideoPreview({ videoData, showStatus }: VideoPreviewProp
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="p-6 border-b border-gray-100">
+            <div className="p-5 border-b border-gray-100 flex items-center justify-between">
               <h3 className="text-xl font-semibold flex items-center">
                 <i className="fas fa-video text-[#E60023] mr-2"></i>
                 Video Preview
               </h3>
+              <div className="text-gray-500 text-sm">
+                <i className="fas fa-check-circle text-green-500 mr-1"></i> Ready to download
+              </div>
             </div>
             
             <div className="p-6 space-y-6">
@@ -73,7 +76,7 @@ export default function VideoPreview({ videoData, showStatus }: VideoPreviewProp
               </div>
               
               {/* Video Preview Container */}
-              <div className="relative bg-black aspect-video rounded-lg overflow-hidden">
+              <div className="relative bg-black aspect-video rounded-lg overflow-hidden shadow-md">
                 <video 
                   ref={videoRef}
                   src={videoData.preview} 
@@ -81,14 +84,15 @@ export default function VideoPreview({ videoData, showStatus }: VideoPreviewProp
                   playsInline
                   onClick={togglePlayPause}
                   onEnded={() => setIsPlaying(false)}
+                  controls={false}
                 />
                 
                 {!isPlaying && (
                   <div 
-                    className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30"
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-40"
                     onClick={togglePlayPause}
                   >
-                    <div className="w-16 h-16 rounded-full bg-black bg-opacity-60 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-black bg-opacity-60 flex items-center justify-center hover:bg-opacity-80 transition-all">
                       <i className="fas fa-play text-white text-xl"></i>
                     </div>
                   </div>
@@ -96,13 +100,19 @@ export default function VideoPreview({ videoData, showStatus }: VideoPreviewProp
               </div>
               
               {/* Download Options */}
-              <div className="space-y-3">
-                <h4 className="font-medium">Download Options</h4>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-medium text-gray-800">Download Options</h4>
+                  <div className="flex items-center space-x-1 text-sm text-gray-500">
+                    <i className="fas fa-info-circle"></i>
+                    <span>No watermarks</span>
+                  </div>
+                </div>
                 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button 
                     onClick={() => handleDownload('hd')}
-                    className="flex-1 bg-[#0076D3] hover:bg-[#0076D3]/90 text-white py-3 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 h-auto"
+                    className="flex-1 bg-[#0076D3] hover:bg-[#0076D3]/90 text-white py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 h-auto"
                   >
                     <i className="fas fa-download mr-2"></i>
                     <span>Download HD</span>
@@ -110,12 +120,16 @@ export default function VideoPreview({ videoData, showStatus }: VideoPreviewProp
                   
                   <Button 
                     onClick={() => handleDownload('sd')}
-                    className="flex-1 bg-gray-700 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 h-auto"
+                    className="flex-1 bg-gray-700 hover:bg-gray-800 text-white py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 h-auto"
                   >
                     <i className="fas fa-download mr-2"></i>
                     <span>Download SD</span>
                   </Button>
                 </div>
+                
+                <p className="text-xs text-center text-gray-500">
+                  Videos are saved directly to your device. We don't store any copies.
+                </p>
               </div>
             </div>
           </div>

@@ -107,15 +107,15 @@ export default function DownloadForm({ onVideoData, showStatus }: DownloadFormPr
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="relative flex-grow">
-            <div className="flex items-center h-full border-2 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#0076D3] focus-within:border-[#0076D3] transition-all">
-              <div className="px-3 py-3 bg-gray-50 border-r text-gray-500 h-full flex items-center">
+            <div className="flex items-center h-full border-2 border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#0076D3] focus-within:border-[#0076D3] transition-all bg-white">
+              <div className="px-3 py-3 bg-gray-100 border-r border-gray-300 text-gray-500 h-full flex items-center">
                 <i className="fab fa-pinterest text-[#E60023] text-lg"></i>
               </div>
               <Input
                 ref={inputRef}
                 type="text"
                 placeholder="Paste Pinterest video URL here"
-                className={`flex-grow px-4 py-4 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none text-base ${urlError ? 'text-[#F44336]' : ''}`}
+                className={`flex-grow px-4 py-4 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none text-base text-gray-900 font-medium bg-white hover:bg-gray-50 focus:bg-white ${urlError ? 'text-[#F44336]' : ''}`}
                 value={url}
                 onChange={handleUrlChange}
                 onPaste={handlePaste}
@@ -126,7 +126,7 @@ export default function DownloadForm({ onVideoData, showStatus }: DownloadFormPr
               {url && (
                 <button
                   type="button"
-                  className="px-3 text-gray-400 hover:text-gray-600"
+                  className="px-3 text-gray-500 hover:text-gray-700 bg-white"
                   onClick={clearUrl}
                   aria-label="Clear input"
                 >
@@ -164,7 +164,7 @@ export default function DownloadForm({ onVideoData, showStatus }: DownloadFormPr
         
         <div className="mt-3">
           <p className="text-sm text-gray-600">
-            Example URL: <span className="font-mono bg-gray-100 px-2 py-1 rounded text-[#0076D3]">https://pinterest.com/pin/123456789</span>
+            Example URL: <span className="font-mono bg-blue-50 px-2 py-1 rounded text-blue-700 border border-blue-100">https://pinterest.com/pin/123456789</span>
           </p>
         </div>
       </form>
