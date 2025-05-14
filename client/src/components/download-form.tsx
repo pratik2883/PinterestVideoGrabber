@@ -104,65 +104,69 @@ export default function DownloadForm({ onVideoData, showStatus }: DownloadFormPr
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="relative">
-          <div className="flex items-center border-2 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#0076D3] focus-within:border-[#0076D3] transition-all">
-            <div className="px-3 py-3 bg-gray-50 border-r text-gray-500">
-              <i className="fab fa-pinterest text-[#E60023]"></i>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="relative flex-grow">
+            <div className="flex items-center h-full border-2 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#0076D3] focus-within:border-[#0076D3] transition-all">
+              <div className="px-3 py-3 bg-gray-50 border-r text-gray-500 h-full flex items-center">
+                <i className="fab fa-pinterest text-[#E60023] text-lg"></i>
+              </div>
+              <Input
+                ref={inputRef}
+                type="text"
+                placeholder="Paste Pinterest video URL here"
+                className={`flex-grow px-4 py-4 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none text-base ${urlError ? 'text-[#F44336]' : ''}`}
+                value={url}
+                onChange={handleUrlChange}
+                onPaste={handlePaste}
+                required
+                aria-invalid={urlError ? 'true' : 'false'}
+                aria-describedby={urlError ? "url-error" : undefined}
+              />
+              {url && (
+                <button
+                  type="button"
+                  className="px-3 text-gray-400 hover:text-gray-600"
+                  onClick={clearUrl}
+                  aria-label="Clear input"
+                >
+                  <i className="fas fa-times"></i>
+                </button>
+              )}
             </div>
-            <Input
-              ref={inputRef}
-              type="text"
-              placeholder="Paste Pinterest video URL here"
-              className={`flex-grow px-4 py-6 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none ${urlError ? 'text-[#F44336]' : ''}`}
-              value={url}
-              onChange={handleUrlChange}
-              onPaste={handlePaste}
-              required
-              aria-invalid={urlError ? 'true' : 'false'}
-              aria-describedby={urlError ? "url-error" : undefined}
-            />
-            {url && (
-              <button
-                type="button"
-                className="px-3 text-gray-400 hover:text-gray-600"
-                onClick={clearUrl}
-                aria-label="Clear input"
-              >
-                <i className="fas fa-times"></i>
-              </button>
-            )}
           </div>
+          
+          <Button
+            type="submit"
+            className="bg-[#0076D3] hover:bg-[#0076D3]/90 text-white py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center h-auto min-w-[140px]"
+            disabled={isProcessing}
+          >
+            {isProcessing ? (
+              <>
+                <i className="fas fa-spinner fa-spin mr-2"></i>
+                <span>Processing...</span>
+              </>
+            ) : (
+              <>
+                <i className="fas fa-download mr-2"></i>
+                <span>Download</span>
+              </>
+            )}
+          </Button>
         </div>
         
         {urlError && (
-          <div id="url-error" className="text-[#F44336] text-sm flex items-center">
+          <div id="url-error" className="text-[#F44336] text-sm flex items-center mt-2">
             <i className="fas fa-exclamation-circle mr-1"></i>
             {urlError}
           </div>
         )}
         
-        <Button
-          type="submit"
-          className="w-full bg-[#0076D3] hover:bg-[#0076D3]/90 text-white py-6 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 h-auto"
-          disabled={isProcessing}
-        >
-          {isProcessing ? (
-            <>
-              <i className="fas fa-spinner fa-spin mr-2"></i>
-              <span>Processing...</span>
-            </>
-          ) : (
-            <>
-              <i className="fas fa-download mr-2"></i>
-              <span>Download Video</span>
-            </>
-          )}
-        </Button>
-        
-        <p className="text-xs text-center text-gray-500 mt-2">
-          Paste a link like: <span className="font-mono bg-gray-100 px-1 py-0.5 rounded">https://pinterest.com/pin/123456789</span>
-        </p>
+        <div className="mt-3">
+          <p className="text-sm text-gray-600">
+            Example URL: <span className="font-mono bg-gray-100 px-2 py-1 rounded text-[#0076D3]">https://pinterest.com/pin/123456789</span>
+          </p>
+        </div>
       </form>
     </div>
   );
