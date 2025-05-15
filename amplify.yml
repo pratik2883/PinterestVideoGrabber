@@ -8,10 +8,16 @@ frontend:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: dist/public
+    baseDirectory: dist
     files:
       - '**/*'
-      - index.html
+      - public/**/*
+      - index.js
   cache:
     paths:
       - node_modules/**/*
+backend:
+  phases:
+    build:
+      commands:
+        - npm run build
