@@ -18,6 +18,10 @@ frontend:
       - node_modules/**/*
 backend:
   phases:
+    preBuild:
+      commands:
+        - npm install
+        - npm install -g serverless
     build:
       commands:
-        - npm run build
+        - serverless deploy --stage prod

@@ -1,0 +1,36 @@
+service: pinterest-video-grabber
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  apiGateway:
+    minimumCompressionSize: 1024
+
+functions:
+  extractVideo:
+    handler: server/lambda/extractVideo.handler
+    events:
+      - http:
+          path: /api/extract
+          method: get
+          cors: true
+
+package:
+  patterns:
+    - '!./**'
+    - 'server/lambda/**'
+    - 'dist/public/**'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'node_modules/**'
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  serverlessOffline:
+    httpPort: 5000
+    host: 0.0.0.0
