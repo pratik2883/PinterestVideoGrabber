@@ -7,6 +7,18 @@ provider:
   region: ${opt:region, 'us-east-1'}
   apiGateway:
     minimumCompressionSize: 1024
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - cloudformation:DescribeStacks
+            - cloudformation:ListStacks
+            - cloudformation:CreateStack
+            - cloudformation:UpdateStack
+            - cloudformation:DeleteStack
+            - cloudformation:DescribeStackEvents
+          Resource: "arn:aws:cloudformation:${aws:region}:${aws:accountId}:stack/${self:service}-${sls:stage}/*"
 
 functions:
   extractVideo:
